@@ -35,11 +35,9 @@
               class="progress-group"
             >
               <div class="progress-group-header">
-                <CIcon
-                  :icon="icons[item.category_id + String(item.category_seq)]"
-                  class="me-2"
-                  size="lg"
-                />
+                <div style="width: 25px">
+                  <img :src="item.icon" />
+                </div>
                 <span class="title">{{ item.category_seq_nm }}</span>
                 <span class="ms-auto fw-semibold">
                   {{ comma(item.sum_price) }}
@@ -69,6 +67,7 @@
 
 <script>
 import axios from 'axios'
+import icons from '@/assets/icons/new_icons.js'
 
 export default {
   name: 'ExpenseSeqDtl',
@@ -78,48 +77,7 @@ export default {
       fixedPriceItems: [],
       totalSumPrice: 0,
       fixedSumPrice: 0,
-      icons: {
-        11: 'cil-house',
-        12: 'cil-input-power',
-        13: 'cil-settings',
-        21: 'cil-screen-smartphone',
-        22: 'cib-internet-explorer',
-        31: 'cil-cash',
-        32: 'cil-cash',
-        33: 'cil-cash',
-        34: 'cil-cash',
-        41: 'cil-restaurant',
-        42: 'cil-pizza',
-        43: 'cil-cart',
-        44: 'cil-truck',
-        45: 'cil-drink',
-        46: 'cil-options',
-        51: 'cil-basket',
-        52: 'cil-tv',
-        61: 'cil-bus-alt',
-        62: 'cil-taxi',
-        63: 'cil-bus-alt',
-        64: 'cil-car-alt',
-        71: 'cil-walk',
-        72: 'cil-diamond',
-        81: 'cil-flower',
-        82: 'cil-cut',
-        83: 'cil-brush',
-        84: 'cil-shower',
-        91: 'cil-hospital',
-        92: 'cil-hospital',
-        93: 'cil-medical-cross',
-        101: 'cil-movie',
-        102: 'cil-airplane-mode',
-        103: 'cil-globe-alt',
-        111: 'cil-education',
-        112: 'cil-book',
-        121: 'cil-birthday-cake',
-        122: 'cil-gift',
-        123: 'cil-cash',
-        124: 'cil-cash',
-        125: 'cil-cash',
-      },
+      icons: icons,
     }
   },
   methods: {
@@ -141,6 +99,14 @@ export default {
           // set account list
           this.expenseItems = res.data.result_data
           this.totalSumPrice = this.expenseItems[0].total_sum_price
+          for (var i = 0; i < this.expenseItems.length; i++) {
+            this.expenseItems[i].icon =
+              icons[
+                this.expenseItems[i].category_id +
+                  String(this.expenseItems[i].category_seq)
+              ]
+            console.log(this.expenseItems[i].icon)
+          }
         })
         .then((err) => {
           console.log(err)
