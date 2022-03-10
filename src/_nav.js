@@ -2,16 +2,6 @@ export default [
   {
     component: 'CNavItem',
     name: '가계부 Home',
-    to: '/dashboard',
-    icon: 'cil-speedometer',
-    badge: {
-      color: 'primary',
-      text: 'NEW',
-    },
-  },
-  {
-    component: 'CNavItem',
-    name: '가계부 Home',
     to: '/accountSummary',
     icon: 'cil-spreadsheet',
   },
