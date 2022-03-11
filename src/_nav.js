@@ -48,13 +48,23 @@ export default [
   {
     component: 'CNavGroup',
     name: '차트',
-    to: '/charts2',
+    to: '/charts',
     icon: 'cil-chart',
     items: [
       {
         component: 'CNavItem',
-        name: '지출 상세 차트',
-        to: '/charts2/expense',
+        name: '지출 차트',
+        to: '/charts/expense',
+      },
+      {
+        component: 'CNavItem',
+        name: '연간 차트',
+        to: '/charts/summaryYear',
+      },
+      {
+        component: 'CNavItem',
+        name: '고정지출 추이',
+        to: '/charts/fixedExpense',
       },
     ],
   },

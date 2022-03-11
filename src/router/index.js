@@ -64,18 +64,28 @@ const routes = [
         component: () => import('@/views/account/MemberExpense.vue'),
       },
       {
-        path: '/charts2',
+        path: '/charts',
         name: '차트',
         component: {
           render() {
             return h(resolveComponent('router-view'))
           },
         },
-        redirect: '/charts2',
+        redirect: '/charts',
         children: [
           {
-            path: '/charts2/expense',
-            name: '지출 상세 차트',
+            path: '/charts/expense',
+            name: '지출 차트',
+            component: () => import('@/views/account/ChartExpense.vue'),
+          },
+          {
+            path: '/charts/summaryYear',
+            name: '연간 차트',
+            component: () => import('@/views/account/ChartExpense.vue'),
+          },
+          {
+            path: '/charts/fixedExpense',
+            name: '고정지출 추이',
             component: () => import('@/views/account/ChartExpense.vue'),
           },
         ],
