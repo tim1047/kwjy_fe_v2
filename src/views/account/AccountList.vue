@@ -13,22 +13,22 @@
     </CButton>
     <br /><br />
     <CCol :xs="12">
-      <CCard class="mb-4" v-for="(val, key) in items" :key="key">
+      <CCard class="mb-4" v-for="item in this.items" :key="item">
         <CCardHeader>
           <strong>{{
-            key.substring(0, 4) +
+            item.accountDt.substring(0, 4) +
             '년 ' +
-            key.substring(4, 6) +
+            item.accountDt.substring(4, 6) +
             '월 ' +
-            key.substring(6, 8) +
+            item.accountDt.substring(6, 8) +
             '일'
           }}</strong>
         </CCardHeader>
         <CCardBody>
           <CAccordion>
-            <CAccordionItem v-for="item in val" :key="item.name">
+            <CAccordionItem v-for="item in item.data" :key="item.name">
               <CAccordionHeader>
-                <div style="width: 20%">
+                <div style="width: 55px">
                   <CAvatar
                     size="md"
                     :src="avatars[Number(item.member_id) - 1]"
@@ -50,9 +50,7 @@
                 </CCardText>
               </CAccordionHeader>
               <CAccordionBody>
-                <div style="float: left; width: 60%">
-                  <strong>{{ item.remark }}</strong>
-                </div>
+                <strong>{{ item.remark }}</strong>
                 <CButton
                   color="info"
                   @click="
@@ -219,7 +217,7 @@
             }
           "
         >
-          Close
+          닫기
         </CButton>
         <CButton
           color="primary"
@@ -230,7 +228,7 @@
             }
           "
         >
-          Save changes
+          저장
         </CButton>
       </CModalFooter>
     </CModal>
@@ -264,7 +262,7 @@ export default {
   },
   data() {
     return {
-      items: {},
+      items: [],
       avatars: [manAvatar, girlAvatar, coupleAvatar],
       visibleModal: false,
       selectedIdx: '',
@@ -388,7 +386,11 @@ export default {
         )
         .then((res) => {
           var result_data_list = res.data.result_data
-          this.items = {}
+          var temp_obj = {
+            data: [],
+            accountDt: '',
+          }
+          this.items = []
 
           for (var i = 0; i < result_data_list.length; i++) {
             var accountCntt = ''
@@ -402,11 +404,19 @@ export default {
             }
             result_data_list[i].accountCntt = accountCntt
 
-            if (!(result_data.account_dt in this.items)) {
-              this.items[result_data.account_dt] = []
+            if (temp_obj.accountDt != result_data.account_dt) {
+              if (temp_obj.accountDt != '') {
+                this.items.push(temp_obj)
+              }
+
+              temp_obj = {
+                data: [],
+                accountDt: result_data.account_dt,
+              }
             }
-            this.items[result_data.account_dt].push(result_data_list[i])
+            temp_obj.data.push(result_data_list[i])
           }
+          this.items.push(temp_obj)
         })
         .then((err) => {
           console.log(err)
