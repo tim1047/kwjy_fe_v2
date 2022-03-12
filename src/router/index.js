@@ -89,11 +89,6 @@ const routes = [
             component: () =>
               import('@/views/account/ChartSummarySixmonths.vue'),
           },
-          {
-            path: '/charts/fixedExpense',
-            name: '고정지출 추이',
-            component: () => import('@/views/account/ChartExpense.vue'),
-          },
         ],
       },
     ],
