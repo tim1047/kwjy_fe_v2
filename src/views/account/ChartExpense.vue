@@ -21,14 +21,6 @@ export default {
     return {
       chartsLib: null,
       // Array will be automatically processed with visualization.arrayToDataTable function
-      /*
-      chartData: [
-        ['Year', 'Sales'],
-        ['2014', 1000],
-        ['2015', 1170],
-        ['2016', 660],
-        ['2017', 1030],
-      ],*/
       chartData: [],
     }
   },

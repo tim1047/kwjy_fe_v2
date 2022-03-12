@@ -81,7 +81,13 @@ const routes = [
           {
             path: '/charts/summaryYear',
             name: '연간 차트',
-            component: () => import('@/views/account/ChartExpense.vue'),
+            component: () => import('@/views/account/ChartSummaryYear.vue'),
+          },
+          {
+            path: '/charts/summarySixmonths',
+            name: '최근 6개월 차트',
+            component: () =>
+              import('@/views/account/ChartSummarySixmonths.vue'),
           },
           {
             path: '/charts/fixedExpense',

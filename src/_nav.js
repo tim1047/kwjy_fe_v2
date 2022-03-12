@@ -63,6 +63,11 @@ export default [
       },
       {
         component: 'CNavItem',
+        name: '최근 6개월 차트',
+        to: '/charts/summarySixmonths',
+      },
+      {
+        component: 'CNavItem',
         name: '고정지출 추이',
         to: '/charts/fixedExpense',
       },
