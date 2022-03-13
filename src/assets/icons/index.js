@@ -113,6 +113,7 @@ import {
   cibInternetExplorer,
   cilWalk,
   cilChart,
+  cilThumbUp,
 } from '@coreui/icons'
 
 export const iconsSet = Object.assign(
@@ -205,6 +206,7 @@ export const iconsSet = Object.assign(
     cibInternetExplorer,
     cilWalk,
     cilChart,
+    cilThumbUp,
   },
   {
     cifUs,

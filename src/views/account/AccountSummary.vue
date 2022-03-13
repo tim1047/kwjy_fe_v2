@@ -1,73 +1,60 @@
 <template>
   <div>
     <CRow :xs="{ cols: 1, gutter: 4 }" :md="{ cols: 3 }">
-      <CCol xs>
-        <CCardGroup>
-          <CWidgetStatsC
-            class="mb-3"
-            color=""
-            :progress="{ value: 75 }"
-            title="수입"
-            :value="comma(divisionSum['income'])"
-          >
-            <template #icon><CIcon icon="cil-dollar" height="36" /></template>
-          </CWidgetStatsC>
-        </CCardGroup>
+      <CCol>
+        <CWidgetStatsF
+          color="primary"
+          title="수입"
+          :value="comma(divisionSum['income'])"
+        >
+          <template #icon>
+            <CIcon icon="cil-cash" size="xl" />
+          </template>
+        </CWidgetStatsF>
       </CCol>
-      <CCol xs>
-        <CCardGroup>
-          <CWidgetStatsC
-            class="mb-3"
-            color=""
-            :progress="{ value: 75 }"
-            title="지출"
-            :value="comma(divisionSum['expense'])"
-          >
-            <template #icon><CIcon icon="cil-basket" height="36" /></template>
-          </CWidgetStatsC>
-        </CCardGroup>
+      <CCol>
+        <CWidgetStatsF
+          color="danger"
+          title="지출"
+          :value="comma(divisionSum['expense'])"
+        >
+          <template #icon>
+            <CIcon icon="cil-cart" size="xl" />
+          </template>
+        </CWidgetStatsF>
       </CCol>
-      <CCol xs>
-        <CCardGroup>
-          <CWidgetStatsC
-            class="mb-3"
-            color=""
-            :progress="{ value: 75 }"
-            title="순수익(수입-지출)"
-            :value="comma(divisionSum['interest'])"
-          >
-            <template #icon><CIcon icon="cil-wallet" height="36" /></template>
-          </CWidgetStatsC>
-        </CCardGroup>
+      <CCol>
+        <CWidgetStatsF
+          color="success"
+          title="순수익(수입 - 지출)"
+          :value="comma(divisionSum['interest'])"
+        >
+          <template #icon>
+            <CIcon icon="cil-wallet" size="xl" />
+          </template>
+        </CWidgetStatsF>
       </CCol>
-      <CCol xs>
-        <CCardGroup>
-          <CWidgetStatsC
-            class="mb-3"
-            color=""
-            :progress="{ value: 75 }"
-            title="투자"
-            :value="comma(divisionSum['invest'])"
-          >
-            <template #icon><CIcon icon="cil-building" height="36" /></template>
-          </CWidgetStatsC>
-        </CCardGroup>
+      <CCol>
+        <CWidgetStatsF
+          color="info"
+          title="투자"
+          :value="comma(divisionSum['invest'])"
+        >
+          <template #icon>
+            <CIcon icon="cil-building" size="xl" />
+          </template>
+        </CWidgetStatsF>
       </CCol>
-      <CCol xs>
-        <CCardGroup>
-          <CWidgetStatsC
-            class="mb-3"
-            color="warning"
-            inverse
-            :progress="{ value: 75 }"
-            title="투자율"
-            :value="divisionSum['invest_rate']"
-          >
-            <template #icon
-              ><CIcon icon="cil-speedometer" height="36"
-            /></template>
-          </CWidgetStatsC>
-        </CCardGroup>
+      <CCol>
+        <CWidgetStatsF
+          color="warning"
+          title="투자율"
+          :value="divisionSum['invest_rate']"
+        >
+          <template #icon>
+            <CIcon icon="cil-thumb-up" size="xl" />
+          </template>
+        </CWidgetStatsF>
       </CCol>
     </CRow>
   </div>
