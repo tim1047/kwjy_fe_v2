@@ -1,4 +1,35 @@
 <template>
+  <CCard class="mb-4">
+    <CCardHeader>
+      <strong>기간 선택</strong>
+    </CCardHeader>
+    <CCardBody>
+      <CFormCheck
+        type="radio"
+        name="flexRadioDefault"
+        label="연간"
+        @change="updateRadio()"
+      />
+      <CFormCheck
+        type="radio"
+        name="flexRadioDefault"
+        label="월간"
+        @change="updateRadio()"
+        checked
+      />
+      <CFormSelect
+        size="lg"
+        class="mb-3"
+        v-model="this.selectedValue"
+        @change="updateChart($event.target.value)"
+      >
+        <option></option>
+        <option v-for="item in selectList" :key="item" :value="item.value">
+          {{ item.text }}
+        </option>
+      </CFormSelect>
+    </CCardBody>
+  </CCard>
   <GChart type="ComboChart" :data="chartData" :options="chartOptions" />
   <GChart
     type="LineChart"
@@ -26,7 +57,7 @@ export default {
       // Array will be automatically processed with visualization.arrayToDataTable function
       chartData: [['월별', '수입', '지출', '투자']],
       chartOptions: {
-        title: '최근 6개월 차트 (수입, 지출, 투자)',
+        title: '기간별 차트 (수입, 지출, 투자)',
         vAxis: { title: '금액' },
         hAxis: { title: '월별' },
         seriesType: 'bars',
@@ -35,18 +66,22 @@ export default {
       },
       chartDataInvestRate: [['월별', '투자율']],
       chartOptionsInvestRate: {
-        title: '최근 6개월 차트 (투자율)',
+        title: '기간별 차트 (투자율)',
         height: 350,
         vAxis: { title: '투자율', minValue: 0 },
         hAxis: { title: '월별' },
       },
       chartDataFixed: [['월별', '고정지출']],
       chartOptionsFixed: {
-        title: '최근 6개월 차트 (고정지출)',
+        title: '기간별 차트 (고정지출)',
         height: 350,
         vAxis: { title: '고정지출' },
         hAxis: { title: '월별' },
       },
+      selectList: [],
+      selectedValue: 6,
+      radioYear: false,
+      radioMonth: true,
     }
   },
   computed: {
@@ -93,15 +128,22 @@ export default {
 
       var year = this.date.curYear
       var month = this.date.curMonth
-      for (var i = 0; i < 5; i++) {
-        month -= 1
-        if (month == 0) {
-          month = 12
-          year -= 1
+
+      if (!this.radioYear) {
+        for (var i = 1; i < this.selectedValue; i++) {
+          month -= 1
+          if (month == 0) {
+            month = 12
+            year -= 1
+          }
         }
+      } else {
+        year = this.selectedValue
+        month = 1
       }
       this.getDivisionSum(year, month, 1)
       this.getFixedPriceSum(year, month, 1)
+      this.updateSelectList()
     },
     getDivisionSum(year, month, cnt) {
       var strtDt = year + ('0' + String(month)).slice(-2) + '01'
@@ -109,6 +151,7 @@ export default {
         year +
         ('0' + String(month)).slice(-2) +
         new Date(year, String(month), 0).getDate()
+      var checkCnt = this.radioYear ? 12 : this.selectedValue
 
       axios
         .get(
@@ -141,7 +184,7 @@ export default {
             )
             this.chartDataInvestRate.push(summary_data_invest_rate_list)
 
-            if (cnt < 6) {
+            if (cnt < checkCnt) {
               month += 1
               if (month > 12) {
                 year += 1
@@ -158,6 +201,7 @@ export default {
         year +
         ('0' + String(month)).slice(-2) +
         new Date(year, String(month), 0).getDate()
+      var checkCnt = this.radioYear ? 12 : this.selectedValue
 
       axios
         .get(
@@ -177,7 +221,7 @@ export default {
             fixed_price_sum_list.push(result_data_list[0].sum_price)
             this.chartDataFixed.push(fixed_price_sum_list)
 
-            if (cnt < 6) {
+            if (cnt < checkCnt) {
               month += 1
               if (month > 12) {
                 year += 1
@@ -187,6 +231,40 @@ export default {
             }
           }
         })
+    },
+    updateSelectList() {
+      this.selectList = []
+      var selectInfo = {}
+
+      if (!this.radioYear) {
+        for (var i = 1; i <= 12; i++) {
+          selectInfo = {
+            text: i + '개월',
+            value: i,
+          }
+          this.selectList.push(selectInfo)
+        }
+      } else {
+        for (var j = 2021; j <= 2022; j++) {
+          selectInfo = {
+            text: j + '년',
+            value: j,
+          }
+          this.selectList.push(selectInfo)
+        }
+      }
+    },
+    updateChart(value) {
+      this.selectedValue = value
+      this.init()
+    },
+    updateRadio() {
+      this.radioYear = !this.radioYear
+      this.radioMonth = !this.radioMonth
+
+      this.selectedValue = this.radioYear ? this.date.curYear : 6
+      this.updateSelectList()
+      this.updateChart(this.selectedValue)
     },
   },
   created() {

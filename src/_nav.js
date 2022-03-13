@@ -58,13 +58,8 @@ export default [
       },
       {
         component: 'CNavItem',
-        name: '연간 차트',
-        to: '/charts/summaryYear',
-      },
-      {
-        component: 'CNavItem',
-        name: '최근 6개월 차트',
-        to: '/charts/summarySixmonths',
+        name: '기간별 차트',
+        to: '/charts/summaryPeriod',
       },
     ],
   },
