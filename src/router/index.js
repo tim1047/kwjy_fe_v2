@@ -64,6 +64,11 @@ const routes = [
         component: () => import('@/views/account/MemberExpense.vue'),
       },
       {
+        path: '/dailySummary',
+        name: '달력 보기',
+        component: () => import('@/views/account/DailySummary.vue'),
+      },
+      {
         path: '/charts',
         name: '차트',
         component: {

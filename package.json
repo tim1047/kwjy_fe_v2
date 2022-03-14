@@ -34,9 +34,11 @@
     "axios": "^0.26.0",
     "chart.js": "^2.9.4",
     "core-js": "^3.19.0",
+    "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.23",
     "vue-google-charts": "^0.3.3",
     "vue-router": "^4.0.12",
+    "vue-simple-calendar": "^6.0.4",
     "vue3-date-time-picker": "^2.7.0",
     "vuex": "^4.0.2"
   },

@@ -1,0 +1,26 @@
+diff --git a/node_modules/vue-simple-calendar/static/css/default.css b/node_modules/vue-simple-calendar/static/css/default.css
+index f057d73..92ec580 100644
+--- a/node_modules/vue-simple-calendar/static/css/default.css
++++ b/node_modules/vue-simple-calendar/static/css/default.css
+@@ -44,7 +44,11 @@ having to override as much.
+ }
+ 
+ .theme-default .cv-day.past {
+-	background-color: #fafafa;
++	background-color: #ffe;
++}
++
++.theme-default .cv-day.future {
++	background-color: #ffe;
+ }
+ 
+ .theme-default .cv-day.outsideOfMonth {
+@@ -52,7 +56,7 @@ having to override as much.
+ }
+ 
+ .theme-default .cv-day.today {
+-	background-color: #ffe;
++	background-color: #eefeff;
+ }
+ 
+ .theme-default .cv-day[aria-selected="true"] {

@@ -46,6 +46,12 @@ export default [
     icon: 'cil-people',
   },
   {
+    component: 'CNavItem',
+    name: '달력 보기',
+    to: '/dailySummary',
+    icon: 'cil-calendar',
+  },
+  {
     component: 'CNavGroup',
     name: '차트',
     to: '/charts',
