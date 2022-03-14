@@ -23,7 +23,6 @@
         v-model="this.selectedValue"
         @change="updateChart($event.target.value)"
       >
-        <option></option>
         <option v-for="item in selectList" :key="item" :value="item.value">
           {{ item.text }}
         </option>
