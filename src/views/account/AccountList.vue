@@ -509,8 +509,8 @@ export default {
     },
     yyyymmdd_to_date(val) {
       var y = val.substring(0, 4)
-      var m = val.substring(5, 6)
-      var d = val.substring(7, 8)
+      var m = val.substring(4, 6)
+      var d = val.substring(6, 8)
       return new Date(y, m - 1, d)
     },
     datepicker_format(val) {
