@@ -39,22 +39,23 @@ const routes = [
           {
             path: '/division/incomeDtl',
             name: '수입',
-            component: () => import('@/views/account/IncomeDtl.vue'),
+            component: () => import('@/views/account/division/IncomeDtl.vue'),
           },
           {
             path: '/division/investDtl',
             name: '투자',
-            component: () => import('@/views/account/InvestDtl.vue'),
+            component: () => import('@/views/account/division/InvestDtl.vue'),
           },
           {
             path: '/division/expenseDtl',
             name: '지출',
-            component: () => import('@/views/account/ExpenseDtl.vue'),
+            component: () => import('@/views/account/division/ExpenseDtl.vue'),
           },
           {
             path: '/division/expenseSeqDtl',
             name: '지출 상세',
-            component: () => import('@/views/account/ExpenseSeqDtl.vue'),
+            component: () =>
+              import('@/views/account/division/ExpenseSeqDtl.vue'),
           },
         ],
       },
@@ -81,12 +82,13 @@ const routes = [
           {
             path: '/charts/expense',
             name: '지출 차트',
-            component: () => import('@/views/account/ChartExpense.vue'),
+            component: () => import('@/views/account/charts/ChartExpense.vue'),
           },
           {
             path: '/charts/summaryPeriod',
             name: '기간별 차트',
-            component: () => import('@/views/account/ChartSummaryPeriod.vue'),
+            component: () =>
+              import('@/views/account/charts/ChartSummaryPeriod.vue'),
           },
         ],
       },
