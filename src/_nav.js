@@ -67,6 +67,11 @@ export default [
         name: '기간별 차트',
         to: '/charts/summaryPeriod',
       },
+      {
+        component: 'CNavItem',
+        name: '일별 지출 추이 차트',
+        to: '/charts/dailyExpensePeriod',
+      },
     ],
   },
 

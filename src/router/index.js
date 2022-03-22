@@ -90,6 +90,12 @@ const routes = [
             component: () =>
               import('@/views/account/charts/ChartSummaryPeriod.vue'),
           },
+          {
+            path: '/charts/dailyExpensePeriod',
+            name: '일별 지출 추이 차트',
+            component: () =>
+              import('@/views/account/charts/ChartDailyExpensePeriod.vue'),
+          },
         ],
       },
     ],
