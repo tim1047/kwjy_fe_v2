@@ -98,6 +98,11 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/asset',
+        name: '자산',
+        component: () => import('@/views/account/AssetList.vue'),
+      },
     ],
   },
 ]

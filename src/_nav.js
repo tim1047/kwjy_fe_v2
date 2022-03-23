@@ -74,6 +74,12 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavItem',
+    name: '자산',
+    to: '/asset',
+    icon: 'cil-cash',
+  },
 
   // {
   //   component: 'CNavItem',
