@@ -62,6 +62,7 @@ import axios from 'axios'
 import coupleAvatar from '@/assets/images/avatars/couple.png'
 import manAvatar from '@/assets/images/avatars/man.png'
 import girlAvatar from '@/assets/images/avatars/girl.png'
+import { comma } from '../../lib/utils/comm_utils.js'
 
 export default {
   name: 'MemberExpense',
@@ -106,7 +107,7 @@ export default {
         })
     },
     comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      return comma(val)
     },
   },
   created() {

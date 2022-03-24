@@ -21,6 +21,7 @@ import '../../../node_modules/vue-simple-calendar/dist/style.css'
 import '../../../node_modules/vue-simple-calendar/static/css/default.css'
 import '../../../node_modules/vue-simple-calendar/static/css/holidays-us.css'
 import axios from 'axios'
+import { comma } from '../../lib/utils/comm_utils.js'
 
 export default {
   name: 'DailySummary',
@@ -107,7 +108,7 @@ export default {
         })
     },
     comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      return comma(val)
     },
   },
   computed: {

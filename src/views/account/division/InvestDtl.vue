@@ -60,6 +60,7 @@
 
 <script>
 import axios from 'axios'
+import { comma } from '../../../lib/utils/comm_utils.js'
 
 export default {
   name: 'InvestDtl',
@@ -91,7 +92,7 @@ export default {
         })
     },
     comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      return comma(val)
     },
   },
   created() {

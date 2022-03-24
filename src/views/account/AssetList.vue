@@ -198,6 +198,8 @@
 </template>
 <script>
 import axios from 'axios'
+import { dateToYYYYMMDD } from '../../lib/utils/date_utils.js'
+import { comma } from '../../lib/utils/comm_utils.js'
 
 export default {
   name: 'AssetList',
@@ -304,7 +306,7 @@ export default {
     getMyAssetList() {
       var now = new Date()
       var yesterday = new Date(now.setDate(now.getDate() - 1))
-      var procDt = this.date_to_yyyymmdd(yesterday)
+      var procDt = dateToYYYYMMDD(yesterday)
 
       // axios call
       axios
@@ -336,13 +338,7 @@ export default {
         })
     },
     comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    },
-    date_to_yyyymmdd(val) {
-      var year = val.getFullYear()
-      var month = ('0' + (1 + val.getMonth())).slice(-2)
-      var day = ('0' + val.getDate()).slice(-2)
-      return year + month + day
+      return comma(val)
     },
     selectItem(item) {
       this.selectedForm = {

@@ -68,6 +68,7 @@
 <script>
 import axios from 'axios'
 import icons from '@/assets/icons/new_icons.js'
+import { comma } from '../../../lib/utils/comm_utils.js'
 
 export default {
   name: 'ExpenseSeqDtl',
@@ -134,7 +135,7 @@ export default {
         })
     },
     comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      return comma(val)
     },
   },
   created() {

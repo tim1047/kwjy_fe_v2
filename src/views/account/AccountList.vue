@@ -254,6 +254,8 @@ import manAvatar from '@/assets/images/avatars/man.png'
 import girlAvatar from '@/assets/images/avatars/girl.png'
 import Datepicker from 'vue3-date-time-picker'
 import 'vue3-date-time-picker/dist/main.css'
+import { dateToYYYYMMDD, YYYYMMDDToDate } from '../../lib/utils/date_utils.js'
+import { comma } from '../../lib/utils/comm_utils.js'
 
 export default {
   name: 'AccountList',
@@ -331,7 +333,7 @@ export default {
         })
     },
     update() {
-      this.selectedForm.account_dt = this.date_to_yyyymmdd(
+      this.selectedForm.account_dt = dateToYYYYMMDD(
         this.selectedForm.account_dt,
       )
       this.requestParam = this.selectedForm
@@ -368,7 +370,7 @@ export default {
       this.selectedForm = {}
       for (var i in item) {
         if (i == 'account_dt') {
-          this.selectedForm[i] = this.yyyymmdd_to_date(item[i])
+          this.selectedForm[i] = YYYYMMDDToDate(item[i])
         } else {
           this.selectedForm[i] = item[i]
         }
@@ -488,30 +490,7 @@ export default {
         })
     },
     comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    },
-    date_format(val) {
-      if (typeof val == 'string') {
-        return (
-          val.substring(0, 4) +
-          '-' +
-          val.substring(4, 6) +
-          '-' +
-          val.substring(6, 8)
-        )
-      }
-    },
-    date_to_yyyymmdd(val) {
-      var year = val.getFullYear()
-      var month = ('0' + (1 + val.getMonth())).slice(-2)
-      var day = ('0' + val.getDate()).slice(-2)
-      return year + month + day
-    },
-    yyyymmdd_to_date(val) {
-      var y = val.substring(0, 4)
-      var m = val.substring(4, 6)
-      var d = val.substring(6, 8)
-      return new Date(y, m - 1, d)
+      return comma(val)
     },
     datepicker_format(val) {
       const day = val.getDate()
