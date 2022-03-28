@@ -32,7 +32,7 @@
                   <CAvatar
                     size="md"
                     :src="avatars[Number(item.member_id) - 1]"
-                    status="success"
+                    :status="avatarStatusList[Number(item.division_id) - 1]"
                   />
                 </div>
                 <CCardText>
@@ -287,6 +287,7 @@ export default {
       categorySeqList: [],
       requestParam: {},
       toasts: [],
+      avatarStatusList: ['success', 'info', 'danger'],
     }
   },
   methods: {
