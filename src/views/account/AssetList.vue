@@ -14,7 +14,9 @@
     <br /><br />
     <CCard>
       <CCardHeader>
-        <strong>총계</strong>
+        <strong>{{
+          '총계 ( 기준일: ' + strToYYYYMMDDHypen(procDt) + ' )'
+        }}</strong>
       </CCardHeader>
       <CCardBody>
         <strong>{{
@@ -198,7 +200,10 @@
 </template>
 <script>
 import axios from 'axios'
-import { dateToYYYYMMDD } from '../../lib/utils/date_utils.js'
+import {
+  dateToYYYYMMDD,
+  strToYYYYMMDDHypen,
+} from '../../lib/utils/date_utils.js'
 import { comma } from '../../lib/utils/comm_utils.js'
 
 export default {
@@ -221,6 +226,7 @@ export default {
       assetList: [],
       toasts: [],
       priceDisabled: false,
+      procDt: '',
     }
   },
   methods: {
@@ -305,17 +311,17 @@ export default {
     },
     getMyAssetList() {
       var now = new Date()
-      var yesterday = new Date(now.setDate(now.getDate() - 1))
-      var procDt = dateToYYYYMMDD(yesterday)
+      //var yesterday = new Date(now.setDate(now.getDate() - 1))
+      this.procDt = dateToYYYYMMDD(now)
 
       // axios call
       axios
         .get(
           this.serverSideUrl +
             '/my_asset_list?strtDt=' +
-            procDt +
+            this.procDt +
             '&endDt=' +
-            procDt,
+            this.procDt,
         )
         .then((res) => {
           var result_data_info = res.data.result_data
@@ -365,6 +371,9 @@ export default {
       } else {
         this.priceDisabled = false
       }
+    },
+    strToYYYYMMDDHypen(val) {
+      return strToYYYYMMDDHypen(val)
     },
   },
   created() {
