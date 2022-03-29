@@ -31,7 +31,9 @@
     <CCol :xs="12">
       <CCard class="mb-4" v-for="(val, key) in this.items.data" :key="key">
         <CCardHeader>
-          <strong>{{ val.asset_nm }}</strong>
+          <strong>{{
+            val.asset_nm + ' ( 총계 : ' + comma(val.asset_tot_sum_price) + ' )'
+          }}</strong>
         </CCardHeader>
         <CCardBody>
           <CAccordion>
