@@ -75,10 +75,22 @@ export default [
     ],
   },
   {
-    component: 'CNavItem',
+    component: 'CNavGroup',
     name: '자산',
     to: '/asset',
     icon: 'cil-cash',
+    items: [
+      {
+        component: 'CNavItem',
+        name: '자산 목록',
+        to: '/asset/assetList',
+      },
+      {
+        component: 'CNavItem',
+        name: '자산 비율',
+        to: '/asset/assetChart',
+      },
+    ],
   },
 
   // {

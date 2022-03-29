@@ -101,7 +101,24 @@ const routes = [
       {
         path: '/asset',
         name: '자산',
-        component: () => import('@/views/account/AssetList.vue'),
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/asset/assetList',
+        children: [
+          {
+            path: '/asset/assetList',
+            name: '자산 목록',
+            component: () => import('@/views/account/asset/AssetList.vue'),
+          },
+          {
+            path: '/asset/assetChart',
+            name: '자산 비율',
+            component: () => import('@/views/account/asset/AssetChart.vue'),
+          },
+        ],
       },
     ],
   },

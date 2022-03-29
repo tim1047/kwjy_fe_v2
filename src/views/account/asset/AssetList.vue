@@ -205,8 +205,8 @@ import axios from 'axios'
 import {
   dateToYYYYMMDD,
   strToYYYYMMDDHypen,
-} from '../../lib/utils/date_utils.js'
-import { comma } from '../../lib/utils/comm_utils.js'
+} from '../../../lib/utils/date_utils.js'
+import { comma } from '../../../lib/utils/comm_utils.js'
 
 export default {
   name: 'AssetList',
