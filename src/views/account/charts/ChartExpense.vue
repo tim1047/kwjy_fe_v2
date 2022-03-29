@@ -1,11 +1,18 @@
 <template>
-  <GChart
-    :settings="{ packages: ['bar'] }"
-    :data="chartData"
-    :options="chartOptions"
-    :createChart="(el, google) => new google.charts.Bar(el)"
-    @ready="onChartReady"
-  />
+  <CCard>
+    <CCardHeader>
+      <strong>지출 차트</strong>
+    </CCardHeader>
+    <CCardBody>
+      <GChart
+        :settings="{ packages: ['bar'] }"
+        :data="chartData"
+        :options="chartOptions"
+        :createChart="(el, google) => new google.charts.Bar(el)"
+        @ready="onChartReady"
+      />
+    </CCardBody>
+  </CCard>
 </template>
 
 <script>
@@ -29,7 +36,7 @@ export default {
       if (!this.chartsLib) return null
       return this.chartsLib.charts.Bar.convertOptions({
         chart: {
-          title: '지출 차트',
+          title: '',
           subtitle: '',
         },
         bars: 'horizontal', // Required for Material Bar Charts.

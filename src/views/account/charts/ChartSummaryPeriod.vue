@@ -29,17 +29,46 @@
       </CFormSelect>
     </CCardBody>
   </CCard>
-  <GChart type="ComboChart" :data="chartData" :options="chartOptions" />
-  <GChart
-    type="LineChart"
-    :data="chartDataInvestRate"
-    :options="chartOptionsInvestRate"
-  />
-  <GChart
-    type="LineChart"
-    :data="chartDataFixed"
-    :options="chartOptionsFixed"
-  />
+  <CCard>
+    <CCardHeader>
+      <strong>기간별 차트 (수입, 지출, 투자)</strong>
+    </CCardHeader>
+    <CCardBody>
+      <GChart
+        :settings="{ packages: ['bar'] }"
+        :data="chartData"
+        :options="chartOptions"
+        :createChart="(el, google) => new google.charts.Bar(el)"
+        @ready="onChartReady"
+      />
+    </CCardBody>
+  </CCard>
+  <br />
+  <CCard>
+    <CCardHeader>
+      <strong>기간별 차트 (투자율)</strong>
+    </CCardHeader>
+    <CCardBody>
+      <GChart
+        type="LineChart"
+        :data="chartDataInvestRate"
+        :options="chartOptionsInvestRate"
+      />
+    </CCardBody>
+  </CCard>
+  <br />
+  <CCard>
+    <CCardHeader>
+      <strong>기간별 차트 (고정지출)</strong>
+    </CCardHeader>
+    <CCardBody>
+      <GChart
+        type="LineChart"
+        :data="chartDataFixed"
+        :options="chartOptionsFixed"
+      />
+    </CCardBody>
+  </CCard>
 </template>
 
 <script>
@@ -56,7 +85,7 @@ export default {
       // Array will be automatically processed with visualization.arrayToDataTable function
       chartData: [['월별', '수입', '지출', '투자']],
       chartOptions: {
-        title: '기간별 차트 (수입, 지출, 투자)',
+        title: '',
         vAxis: { title: '금액' },
         hAxis: { title: '월별' },
         seriesType: 'bars',
@@ -65,14 +94,14 @@ export default {
       },
       chartDataInvestRate: [['월별', '투자율']],
       chartOptionsInvestRate: {
-        title: '기간별 차트 (투자율)',
+        title: '',
         height: 350,
         vAxis: { title: '투자율', minValue: 0 },
         hAxis: { title: '월별' },
       },
       chartDataFixed: [['월별', '고정지출']],
       chartOptionsFixed: {
-        title: '기간별 차트 (고정지출)',
+        title: '',
         height: 350,
         vAxis: { title: '고정지출' },
         hAxis: { title: '월별' },

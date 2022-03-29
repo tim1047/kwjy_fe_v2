@@ -29,7 +29,14 @@
       </CFormSelect>
     </CCardBody>
   </CCard>
-  <GChart type="LineChart" :data="chartData" :options="chartOptions" />
+  <CCard>
+    <CCardHeader>
+      <strong>일별 지출 추이 차트</strong>
+    </CCardHeader>
+    <CCardBody>
+      <GChart type="LineChart" :data="chartData" :options="chartOptions" />
+    </CCardBody>
+  </CCard>
 </template>
 
 <script>
@@ -46,7 +53,7 @@ export default {
       // Array will be automatically processed with visualization.arrayToDataTable function
       chartData: [],
       chartOptions: {
-        title: '일별 지출 추이 차트',
+        title: '',
         vAxis: { title: '금액' },
         hAxis: { title: '일자' },
         height: 500,
