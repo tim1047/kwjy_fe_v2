@@ -1,17 +1,97 @@
 <template>
   <div>
-    <CButton
-      color="info"
-      @click="
-        () => {
-          initForm()
-          visibleModal = true
-        }
-      "
-    >
-      <CIcon icon="cil-plus" />
-    </CButton>
-    <br /><br />
+    <CRow :xs="{ cols: 8, gutter: 4 }" :md="{ cols: 8 }">
+      <CCol>
+        <CButton
+          color="info"
+          @click="
+            () => {
+              initForm()
+              visibleModal = true
+            }
+          "
+        >
+          <CIcon icon="cil-plus" />
+        </CButton>
+      </CCol>
+      <CCol>
+        <CFormLabel for="searchDivision" style="float: right">구분</CFormLabel>
+      </CCol>
+      <CCol>
+        <CFormSelect
+          id="searchDivisionId"
+          aria-label="Default select example"
+          v-model="this.searchForm.searchDivisionId"
+          @change="getCategoryList($event.target.value)"
+        >
+          <option value=""></option>
+          <option
+            v-for="item in divisionList"
+            :key="item.division_id"
+            :value="item.division_id"
+          >
+            {{ item.division_nm }}
+          </option>
+        </CFormSelect>
+      </CCol>
+      <CCol>
+        <CFormLabel for="searchCategoryId" style="float: right">
+          대분류
+        </CFormLabel>
+      </CCol>
+      <CCol>
+        <CFormSelect
+          id="searchCategory"
+          aria-label="Default select example"
+          v-model="this.searchForm.searchCategoryId"
+          @change="getCategorySeqList($event.target.value)"
+        >
+          <option value=""></option>
+          <option
+            v-for="item in categoryList"
+            :key="item.category_id"
+            :value="item.category_id"
+          >
+            {{ item.category_nm }}
+          </option>
+        </CFormSelect>
+      </CCol>
+      <CCol>
+        <CFormLabel for="searchCategorySeq" style="float: right">
+          소분류
+        </CFormLabel>
+      </CCol>
+      <CCol>
+        <CFormSelect
+          id="searchCategorySeq"
+          aria-label="Default select example"
+          v-model="this.searchForm.searchCategorySeq"
+        >
+          <option value=""></option>
+          <option
+            v-for="item in categorySeqList"
+            :key="item.category_seq"
+            :value="item.category_seq"
+          >
+            {{ item.category_seq_nm }}
+          </option>
+        </CFormSelect>
+      </CCol>
+      <CCol>
+        <CButton
+          color="info"
+          @click="
+            () => {
+              this.getAccountList()
+            }
+          "
+          style="float: right"
+        >
+          <CIcon icon="cil-search" />
+        </CButton>
+      </CCol>
+    </CRow>
+    <br />
     <CCol :xs="12">
       <CCard class="mb-4" v-for="item in this.items" :key="item">
         <CCardHeader>
@@ -280,6 +360,11 @@ export default {
         remark: '',
         impulse_yn: 'N',
       },
+      searchForm: {
+        searchDivisionId: '',
+        searchCategoryId: '',
+        searchCategorySeq: '',
+      },
       divisionList: [],
       memberList: [],
       paymentList: [],
@@ -385,7 +470,13 @@ export default {
             '/account?strtDt=' +
             this.strtDt +
             '&endDt=' +
-            this.endDt,
+            this.endDt +
+            '&searchDivisionId=' +
+            this.searchForm.searchDivisionId +
+            '&searchCategoryId=' +
+            this.searchForm.searchCategoryId +
+            '&searchCategorySeq=' +
+            this.searchForm.searchCategorySeq,
         )
         .then((res) => {
           var result_data_list = res.data.result_data

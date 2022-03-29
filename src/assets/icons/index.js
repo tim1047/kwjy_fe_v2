@@ -115,6 +115,7 @@ import {
   cilChart,
   cilThumbUp,
   cilChevronDoubleUp,
+  cilSearch,
 } from '@coreui/icons'
 
 export const iconsSet = Object.assign(
@@ -209,6 +210,7 @@ export const iconsSet = Object.assign(
     cilChart,
     cilThumbUp,
     cilChevronDoubleUp,
+    cilSearch,
   },
   {
     cifUs,
