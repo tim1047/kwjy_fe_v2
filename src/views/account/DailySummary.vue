@@ -55,7 +55,7 @@ export default {
       this.endDt =
         d.getFullYear() +
         ('0' + (d.getMonth() + 1)).slice(-2) +
-        new Date(d.getFullYear(), d.getMonth(), 0).getDate()
+        new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()
     },
     init() {
       this.getDivisionSumDaily()
