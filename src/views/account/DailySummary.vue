@@ -36,7 +36,11 @@ export default {
       endDt:
         new Date().getFullYear() +
         ('0' + (new Date().getMonth() + 1)).slice(-2) +
-        new Date(new Date().getFullYear(), new Date().getMonth(), 0).getDate(),
+        new Date(
+          new Date().getFullYear(),
+          new Date().getMonth() + 1,
+          0,
+        ).getDate(),
     }
   },
   components: {
