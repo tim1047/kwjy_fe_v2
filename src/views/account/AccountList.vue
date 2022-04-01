@@ -15,69 +15,6 @@
         </CButton>
       </CCol>
       <CCol>
-        <CFormLabel for="searchDivision" style="float: right">구분</CFormLabel>
-      </CCol>
-      <CCol>
-        <CFormSelect
-          id="searchDivisionId"
-          aria-label="Default select example"
-          v-model="this.searchForm.searchDivisionId"
-          @change="getCategoryList($event.target.value)"
-        >
-          <option value=""></option>
-          <option
-            v-for="item in divisionList"
-            :key="item.division_id"
-            :value="item.division_id"
-          >
-            {{ item.division_nm }}
-          </option>
-        </CFormSelect>
-      </CCol>
-      <CCol>
-        <CFormLabel for="searchCategoryId" style="float: right">
-          대분류
-        </CFormLabel>
-      </CCol>
-      <CCol>
-        <CFormSelect
-          id="searchCategory"
-          aria-label="Default select example"
-          v-model="this.searchForm.searchCategoryId"
-          @change="getCategorySeqList($event.target.value)"
-        >
-          <option value=""></option>
-          <option
-            v-for="item in categoryList"
-            :key="item.category_id"
-            :value="item.category_id"
-          >
-            {{ item.category_nm }}
-          </option>
-        </CFormSelect>
-      </CCol>
-      <CCol>
-        <CFormLabel for="searchCategorySeq" style="float: right">
-          소분류
-        </CFormLabel>
-      </CCol>
-      <CCol>
-        <CFormSelect
-          id="searchCategorySeq"
-          aria-label="Default select example"
-          v-model="this.searchForm.searchCategorySeq"
-        >
-          <option value=""></option>
-          <option
-            v-for="item in categorySeqList"
-            :key="item.category_seq"
-            :value="item.category_seq"
-          >
-            {{ item.category_seq_nm }}
-          </option>
-        </CFormSelect>
-      </CCol>
-      <CCol>
         <CButton
           color="info"
           @click="
@@ -92,6 +29,82 @@
       </CCol>
     </CRow>
     <br />
+    <CCard class="mb-4">
+      <CCardHeader><strong>조회 조건</strong></CCardHeader>
+      <CCardBody>
+        <CRow>
+          <CCol xs="3">
+            <CFormLabel for="searchDivision" style="float: right"
+              >구분</CFormLabel
+            >
+          </CCol>
+          <CCol>
+            <CFormSelect
+              id="searchDivisionId"
+              aria-label="Default select example"
+              v-model="this.searchForm.searchDivisionId"
+              @change="getCategoryList($event.target.value)"
+            >
+              <option value=""></option>
+              <option
+                v-for="item in divisionList"
+                :key="item.division_id"
+                :value="item.division_id"
+              >
+                {{ item.division_nm }}
+              </option>
+            </CFormSelect>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol xs="3">
+            <CFormLabel for="searchCategoryId" style="float: right">
+              대분류
+            </CFormLabel>
+          </CCol>
+          <CCol>
+            <CFormSelect
+              id="searchCategory"
+              aria-label="Default select example"
+              v-model="this.searchForm.searchCategoryId"
+              @change="getCategorySeqList($event.target.value)"
+            >
+              <option value=""></option>
+              <option
+                v-for="item in categoryList"
+                :key="item.category_id"
+                :value="item.category_id"
+              >
+                {{ item.category_nm }}
+              </option>
+            </CFormSelect>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol xs="3">
+            <CFormLabel for="searchCategorySeq" style="float: right">
+              소분류
+            </CFormLabel>
+          </CCol>
+          <CCol>
+            <CFormSelect
+              id="searchCategorySeq"
+              aria-label="Default select example"
+              v-model="this.searchForm.searchCategorySeq"
+            >
+              <option value=""></option>
+              <option
+                v-for="item in categorySeqList"
+                :key="item.category_seq"
+                :value="item.category_seq"
+              >
+                {{ item.category_seq_nm }}
+              </option>
+            </CFormSelect>
+          </CCol>
+        </CRow>
+      </CCardBody>
+    </CCard>
     <CCol :xs="12">
       <CCard class="mb-4" v-for="item in this.items" :key="item">
         <CCardHeader>
