@@ -33,7 +33,7 @@
       <CCardHeader><strong>조회 조건</strong></CCardHeader>
       <CCardBody>
         <CRow>
-          <CCol xs="2">
+          <CCol xs="3">
             <CFormLabel for="searchDivision" style="float: right"
               >구분</CFormLabel
             >
@@ -55,7 +55,7 @@
               </option>
             </CFormSelect>
           </CCol>
-          <CCol xs="1">
+          <CCol xs="2">
             <CFormLabel for="searchFixedPriceYn" style="float: right"
               >고정지출</CFormLabel
             >
@@ -67,13 +67,14 @@
               v-model="this.searchForm.searchFixedPriceYn"
               :disabled="this.searchForm.searchDivisionId != '3'"
             >
+              <option value="">전체</option>
               <option value="N">N</option>
               <option value="Y">Y</option>
             </CFormSelect>
           </CCol>
         </CRow>
         <CRow>
-          <CCol>
+          <CCol xs="3">
             <CFormLabel for="searchCategoryId" style="float: right">
               대분류
             </CFormLabel>
@@ -97,7 +98,7 @@
           </CCol>
         </CRow>
         <CRow>
-          <CCol>
+          <CCol xs="3">
             <CFormLabel for="searchCategorySeq" style="float: right">
               소분류
             </CFormLabel>
@@ -393,7 +394,7 @@ export default {
         searchDivisionId: '',
         searchCategoryId: '',
         searchCategorySeq: '',
-        searchFixedPriceYn: 'N',
+        searchFixedPriceYn: '',
       },
       divisionList: [],
       memberList: [],
@@ -630,7 +631,7 @@ export default {
     changeDivisionId(value) {
       this.getCategoryList(value)
       if (value != '3') {
-        this.searchForm.searchFixedPriceYn = 'N'
+        this.searchForm.searchFixedPriceYn = ''
       }
     },
   },
