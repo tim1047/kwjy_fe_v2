@@ -33,7 +33,7 @@
       <CCardHeader><strong>조회 조건</strong></CCardHeader>
       <CCardBody>
         <CRow>
-          <CCol xs="3">
+          <CCol xs="2">
             <CFormLabel for="searchDivision" style="float: right"
               >구분</CFormLabel
             >
@@ -43,9 +43,9 @@
               id="searchDivisionId"
               aria-label="Default select example"
               v-model="this.searchForm.searchDivisionId"
-              @change="getCategoryList($event.target.value)"
+              @change="changeDivisionId($event.target.value)"
             >
-              <option value=""></option>
+              <option value="">전체</option>
               <option
                 v-for="item in divisionList"
                 :key="item.division_id"
@@ -55,9 +55,25 @@
               </option>
             </CFormSelect>
           </CCol>
+          <CCol xs="1">
+            <CFormLabel for="searchFixedPriceYn" style="float: right"
+              >고정지출</CFormLabel
+            >
+          </CCol>
+          <CCol>
+            <CFormSelect
+              id="searchFixedPriceYn"
+              aria-label="Default select example"
+              v-model="this.searchForm.searchFixedPriceYn"
+              :disabled="this.searchForm.searchDivisionId != '3'"
+            >
+              <option value="N">N</option>
+              <option value="Y">Y</option>
+            </CFormSelect>
+          </CCol>
         </CRow>
         <CRow>
-          <CCol xs="3">
+          <CCol>
             <CFormLabel for="searchCategoryId" style="float: right">
               대분류
             </CFormLabel>
@@ -69,7 +85,7 @@
               v-model="this.searchForm.searchCategoryId"
               @change="getCategorySeqList($event.target.value)"
             >
-              <option value=""></option>
+              <option value="">전체</option>
               <option
                 v-for="item in categoryList"
                 :key="item.category_id"
@@ -81,7 +97,7 @@
           </CCol>
         </CRow>
         <CRow>
-          <CCol xs="3">
+          <CCol>
             <CFormLabel for="searchCategorySeq" style="float: right">
               소분류
             </CFormLabel>
@@ -92,7 +108,7 @@
               aria-label="Default select example"
               v-model="this.searchForm.searchCategorySeq"
             >
-              <option value=""></option>
+              <option value="">전체</option>
               <option
                 v-for="item in categorySeqList"
                 :key="item.category_seq"
@@ -377,6 +393,7 @@ export default {
         searchDivisionId: '',
         searchCategoryId: '',
         searchCategorySeq: '',
+        searchFixedPriceYn: 'N',
       },
       divisionList: [],
       memberList: [],
@@ -489,7 +506,9 @@ export default {
             '&searchCategoryId=' +
             this.searchForm.searchCategoryId +
             '&searchCategorySeq=' +
-            this.searchForm.searchCategorySeq,
+            this.searchForm.searchCategorySeq +
+            '&searchFixedPriceYn=' +
+            this.searchForm.searchFixedPriceYn,
         )
         .then((res) => {
           var result_data_list = res.data.result_data
@@ -607,6 +626,12 @@ export default {
       this.toasts.push({
         content: content,
       })
+    },
+    changeDivisionId(value) {
+      this.getCategoryList(value)
+      if (value != '3') {
+        this.searchForm.searchFixedPriceYn = 'N'
+      }
     },
   },
   created() {
