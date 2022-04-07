@@ -125,6 +125,8 @@ export default {
         )
         .then((res) => {
           // set account list
+          this.fixedSumPrice = 0
+
           this.fixedPriceItems = res.data.result_data
           this.fixedPriceItems.forEach((value) => {
             this.fixedSumPrice += value.sum_price
